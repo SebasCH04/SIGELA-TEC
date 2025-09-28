@@ -15,7 +15,7 @@ import {
   User,
   Clock
 } from 'lucide-react';
-import { MobileLayout } from '../layout/MobileLayout';
+import { WebLayout } from '../layout/WebLayout';
 
 interface ApprovedRequest {
   id: string;
@@ -140,7 +140,7 @@ export const TechnicianDashboard: React.FC = () => {
   );
 
   return (
-    <MobileLayout headerContent={headerContent}>
+    <WebLayout headerContent={headerContent}>
       <div className="p-4 space-y-4">
         <Tabs defaultValue="requests" className="w-full">
           <TabsList className="grid w-full grid-cols-4 text-xs">
@@ -378,6 +378,6 @@ export const TechnicianDashboard: React.FC = () => {
           </TabsContent>
         </Tabs>
       </div>
-    </MobileLayout>
+    </WebLayout>
   );
 };

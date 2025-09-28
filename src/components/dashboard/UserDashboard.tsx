@@ -16,7 +16,7 @@ import {
   AlertCircle,
   XCircle
 } from 'lucide-react';
-import { MobileLayout } from '../layout/MobileLayout';
+import { WebLayout } from '../layout/WebLayout';
 
 interface Reservation {
   id: string;
@@ -106,7 +106,7 @@ export const UserDashboard: React.FC = () => {
   );
 
   return (
-    <MobileLayout headerContent={headerContent}>
+    <WebLayout headerContent={headerContent}>
       <div className="p-4 space-y-4">
         {/* Resumen de bienvenida */}
         <Card>
@@ -297,6 +297,6 @@ export const UserDashboard: React.FC = () => {
           </TabsContent>
         </Tabs>
       </div>
-    </MobileLayout>
+    </WebLayout>
   );
 };

@@ -38,74 +38,74 @@ export const LoginForm: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-primary relative overflow-hidden">
-      {/* TEC Header */}
-      <div className="bg-primary text-white p-6 text-center relative z-10">
-        <div className="flex items-center justify-center gap-3 mb-2">
-          <div className="text-3xl font-bold">TEC</div>
-          <div className="h-8 w-px bg-white"></div>
-          <div className="text-sm leading-tight">
-            <div>Tecnológico</div>
-            <div>de Costa Rica</div>
+    <div className="min-h-screen bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center">
+      <div className="w-full max-w-2xl mx-auto px-6">
+        {/* TEC Header */}
+        <div className="text-center mb-8">
+          <div className="flex items-center justify-center gap-4 mb-4">
+            <div className="text-4xl font-bold text-white">TEC</div>
+            <div className="h-12 w-px bg-white"></div>
+            <div className="text-white leading-tight">
+              <div className="text-lg">Tecnológico</div>
+              <div className="text-lg">de Costa Rica</div>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Laboratory Hero Image */}
-      <div className="relative h-48 overflow-hidden">
-        <img 
-          src={laboratoryHero} 
-          alt="Laboratorio TEC" 
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-black/20"></div>
-      </div>
+        {/* Laboratory Hero Image */}
+        <div className="relative h-64 overflow-hidden rounded-t-lg">
+          <img 
+            src={laboratoryHero} 
+            alt="Laboratorio TEC" 
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/20"></div>
+        </div>
 
-      {/* Login Card */}
-      <div className="relative -mt-8 px-6 pb-8">
-        <Card className="w-full shadow-xl">
-          <CardHeader className="text-center pb-4">
-            <h1 className="text-2xl font-bold text-primary">SIGELA-TEC</h1>
-            <p className="text-sm text-muted-foreground">Sistema de Gestión de Laboratorios</p>
+        {/* Login Card */}
+        <Card className="rounded-t-none shadow-2xl border-t-0">
+          <CardHeader className="text-center pb-6">
+            <h1 className="text-3xl font-bold text-primary">SIGELA-TEC</h1>
+            <p className="text-base text-muted-foreground">Sistema de Gestión de Laboratorios</p>
           </CardHeader>
-          <CardContent>
-            <form onSubmit={handleLogin} className="space-y-4">
+          <CardContent className="px-8 pb-8">
+            <form onSubmit={handleLogin} className="space-y-6">
               {/* Username Field */}
               <div className="relative">
-                <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+                <User className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
                 <Input
                   type="text"
                   placeholder="Usuario"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  className="pl-10 h-12 bg-tec-gray border-tec-gray-medium"
+                  className="pl-12 h-14 text-base bg-tec-gray border-tec-gray-medium"
                   required
                 />
               </div>
 
               {/* Password Field */}
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+                <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
                 <Input
                   type={showPassword ? 'text' : 'password'}
                   placeholder="Contraseña"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="pl-10 pr-10 h-12 bg-tec-gray border-tec-gray-medium"
+                  className="pl-12 pr-12 h-14 text-base bg-tec-gray border-tec-gray-medium"
                   required
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground"
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-muted-foreground"
                 >
-                  {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                  {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                 </button>
               </div>
 
               {/* Role Selection */}
               <Select value={selectedRole} onValueChange={setSelectedRole} required>
-                <SelectTrigger className="h-12 bg-tec-gray border-tec-gray-medium">
+                <SelectTrigger className="h-14 text-base bg-tec-gray border-tec-gray-medium">
                   <SelectValue placeholder="Seleccionar Rol" />
                 </SelectTrigger>
                 <SelectContent>
@@ -120,7 +120,7 @@ export const LoginForm: React.FC = () => {
               {/* Login Button */}
               <Button 
                 type="submit" 
-                className="w-full h-12 text-lg font-medium bg-primary hover:bg-primary-dark transition-colors"
+                className="w-full h-14 text-lg font-medium bg-primary hover:bg-primary-dark transition-colors"
                 disabled={isLoading || !username || !password || !selectedRole}
               >
                 {isLoading ? 'Iniciando Sesión...' : 'Iniciar Sesión'}
@@ -138,6 +138,10 @@ export const LoginForm: React.FC = () => {
             </form>
           </CardContent>
         </Card>
+
+        <div className="text-center mt-6 text-sm text-white/80">
+          © 2024 Tecnológico de Costa Rica
+        </div>
       </div>
     </div>
   );

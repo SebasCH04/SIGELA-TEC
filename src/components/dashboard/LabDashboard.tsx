@@ -18,7 +18,7 @@ import {
   CheckCircle,
   XCircle
 } from 'lucide-react';
-import { MobileLayout } from '../layout/MobileLayout';
+import { WebLayout } from '../layout/WebLayout';
 
 interface LabInfo {
   name: string;
@@ -117,10 +117,10 @@ export const LabDashboard: React.FC = () => {
   );
 
   return (
-    <MobileLayout headerContent={headerContent}>
-      <div className="p-4 space-y-4">
+    <WebLayout headerContent={headerContent}>
+      <div className="space-y-6">
         <Tabs defaultValue="info" className="w-full">
-          <TabsList className="grid w-full grid-cols-5 text-xs">
+          <TabsList className="grid w-full grid-cols-5 text-sm">
             <TabsTrigger value="info">Info</TabsTrigger>
             <TabsTrigger value="inventory">Inventario</TabsTrigger>
             <TabsTrigger value="calendar">Calendario</TabsTrigger>
@@ -128,7 +128,7 @@ export const LabDashboard: React.FC = () => {
             <TabsTrigger value="history">Historial</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="info" className="space-y-4 mt-4">
+          <TabsContent value="info" className="space-y-6 mt-6">
             {/* Información General */}
             <Card>
               <CardHeader className="pb-3">
@@ -327,6 +327,6 @@ export const LabDashboard: React.FC = () => {
           </TabsContent>
         </Tabs>
       </div>
-    </MobileLayout>
+    </WebLayout>
   );
 };
