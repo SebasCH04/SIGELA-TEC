@@ -46,7 +46,7 @@ export const LoginForm: React.FC = () => {
             <div className="text-4xl font-bold text-white">TEC</div>
             <div className="h-12 w-px bg-white"></div>
             <div className="text-white leading-tight">
-              <div className="text-lg">Tecnológico</div>
+              <div className="text-lg">Instituto Tecnológico</div>
               <div className="text-lg">de Costa Rica</div>
             </div>
           </div>
@@ -140,7 +140,7 @@ export const LoginForm: React.FC = () => {
         </Card>
 
         <div className="text-center mt-6 text-sm text-white/80">
-          © 2024 Tecnológico de Costa Rica
+          © 2025 Instituto Tecnológico de Costa Rica
         </div>
       </div>
     </div>
