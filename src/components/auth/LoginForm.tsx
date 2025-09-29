@@ -7,34 +7,80 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { User, Lock, Eye, EyeOff } from 'lucide-react';
 import laboratoryHero from '@/assets/laboratory-hero.jpg';
 
+// 1) Opciones que muestras en la UI (no cambian)
 const userRoles = [
-  { value: 'estudiante', label: 'Estudiante' },
-  { value: 'profesor', label: 'Profesor/Docente' },
-  { value: 'tecnico', label: 'Personal Técnico' },
-  { value: 'encargado', label: 'Encargado de Laboratorio' },
-  { value: 'administrador', label: 'Administrador del Sistema' },
+  { value: 'estudiante',   label: 'Estudiante' },
+  { value: 'profesor',     label: 'Profesor/Docente' },
+  { value: 'tecnico',      label: 'Personal Técnico' },
+  { value: 'encargado',    label: 'Encargado de Laboratorio' },
+  { value: 'administrador',label: 'Administrador del Sistema' },
   { value: 'departamento', label: 'Escuela/Departamento' },
 ];
+
+// 2) Mapa "UI → Backend" (ajústalo a los códigos reales que guardaste en SQL)
+const ROLE_UI_TO_API: Record<string, string> = {
+  estudiante:   'ESTUDIANTE',
+  profesor:     'PROF',         // o 'PROFESOR' si así lo tienes en BD
+  tecnico:      'TECNICO',
+  encargado:    'ENCARGADO',
+  administrador:'ADMIN',
+  departamento: 'DEPARTAMENTO',
+};
+
+// 3) A dónde navegar según el rol REAL devuelto por el backend
+const MODULE_BY_ROLE: Record<string, string> = {
+  ADMIN:        '/dashboard/administrador',
+  PROF:         '/dashboard/profesor',
+  PROFESOR:     '/dashboard/profesor',      // por si usas este código en BD
+  TECNICO:      '/dashboard/tecnico',
+  ENCARGADO:    '/dashboard/encargado',
+  ESTUDIANTE:   '/dashboard/estudiante',
+  DEPARTAMENTO: '/dashboard/departamento',
+};
 
 export const LoginForm: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [selectedRole, setSelectedRole] = useState('');
+  const [selectedRole, setSelectedRole] = useState(''); // rol UI (spanish)
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [err, setErr] = useState<string | null>(null);
   const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!username || !password || !selectedRole) return;
-    
+
     setIsLoading(true);
-    
-    // Simulate authentication
-    setTimeout(() => {
+    setErr(null);
+
+    try {
+      // Traduce rol UI → código del backend
+      const apiRole = ROLE_UI_TO_API[selectedRole];
+
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include', // importante para la cookie httpOnly
+        body: JSON.stringify({ username, password, role: apiRole }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data?.error || 'Error de autenticación');
+      }
+
+      // El backend devuelve { user: { id, username, role, active } }
+      const user = data.user as { id:number; username:string; role:string; active?:boolean };
+
+      // Decide destino por el rol REAL del backend
+      const dest = MODULE_BY_ROLE[user.role] ?? `/dashboard/${selectedRole}`;
+      navigate(dest, { replace: true });
+    } catch (e: any) {
+      setErr(e?.message || 'Error de autenticación');
+    } finally {
       setIsLoading(false);
-      navigate(`/dashboard/${selectedRole}`);
-    }, 1500);
+    }
   };
 
   return (
@@ -54,9 +100,9 @@ export const LoginForm: React.FC = () => {
 
         {/* Laboratory Hero Image */}
         <div className="relative h-64 overflow-hidden rounded-t-lg">
-          <img 
-            src={laboratoryHero} 
-            alt="Laboratorio TEC" 
+          <img
+            src={laboratoryHero}
+            alt="Laboratorio TEC"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/20"></div>
@@ -68,14 +114,15 @@ export const LoginForm: React.FC = () => {
             <h1 className="text-3xl font-bold text-primary">SIGELA-TEC</h1>
             <p className="text-base text-muted-foreground">Sistema de Gestión de Laboratorios</p>
           </CardHeader>
+
           <CardContent className="px-8 pb-8">
             <form onSubmit={handleLogin} className="space-y-6">
-              {/* Username Field */}
+              {/* Username */}
               <div className="relative">
-                <User className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
+                <User className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground h-5 w-5" />
                 <Input
                   type="text"
-                  placeholder="Usuario"
+                  placeholder="Correo Electrónico"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   className="pl-12 h-14 text-base bg-tec-gray border-tec-gray-medium"
@@ -83,9 +130,9 @@ export const LoginForm: React.FC = () => {
                 />
               </div>
 
-              {/* Password Field */}
+              {/* Password */}
               <div className="relative">
-                <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
+                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground h-5 w-5" />
                 <Input
                   type={showPassword ? 'text' : 'password'}
                   placeholder="Contraseña"
@@ -97,14 +144,14 @@ export const LoginForm: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-muted-foreground"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground"
                 >
                   {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                 </button>
               </div>
 
-              {/* Role Selection */}
-              <Select value={selectedRole} onValueChange={setSelectedRole} required>
+              {/* Role */}
+              <Select value={selectedRole} onValueChange={setSelectedRole}>
                 <SelectTrigger className="h-14 text-base bg-tec-gray border-tec-gray-medium">
                   <SelectValue placeholder="Seleccionar Rol" />
                 </SelectTrigger>
@@ -117,16 +164,23 @@ export const LoginForm: React.FC = () => {
                 </SelectContent>
               </Select>
 
-              {/* Login Button */}
-              <Button 
-                type="submit" 
+              {/* Error */}
+              {err && (
+                <p className="text-red-500 text-sm text-center">
+                  {err}
+                </p>
+              )}
+
+              {/* Submit */}
+              <Button
+                type="submit"
                 className="w-full h-14 text-lg font-medium bg-primary hover:bg-primary-dark transition-colors"
                 disabled={isLoading || !username || !password || !selectedRole}
               >
                 {isLoading ? 'Iniciando Sesión...' : 'Iniciar Sesión'}
               </Button>
 
-              {/* Forgot Password Link */}
+              {/* Forgot */}
               <div className="text-center">
                 <button
                   type="button"
