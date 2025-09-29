@@ -3,7 +3,7 @@ export const api = {
     const r = await fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      credentials: "include", // <- MUY IMPORTANTE (cookie httpOnly)
+      credentials: "include",
       body: body ? JSON.stringify(body) : undefined,
     });
     if (!r.ok) throw new Error((await r.json()).error || r.statusText);
