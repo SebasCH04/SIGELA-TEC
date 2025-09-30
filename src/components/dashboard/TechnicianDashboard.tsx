@@ -114,6 +114,8 @@ export const TechnicianDashboard: React.FC = () => {
     }
   ]);
 
+  const [loading, setLoading] = useState(false);
+
   const getRequestStatusColor = (status: string) => {
     switch (status) {
       case 'entregado': return 'bg-success text-success-foreground';
@@ -138,6 +140,35 @@ export const TechnicianDashboard: React.FC = () => {
       <p className="text-sm opacity-90">Gestión Operativa</p>
     </div>
   );
+
+  const handleDeliver = async (reservationId: number) => {
+    try {
+      setLoading(true);
+      // await Reservations.deliver(reservationId);
+      // volver a cargar la lista o actualizar el estado local
+      // await loadApprovedRequests(); // función que ya tienes para obtener solicitudes
+      console.log(`Reserva ${reservationId} marcada como entregada`);
+    } catch (err) {
+      console.error(err);
+      // toast.error("No se pudo marcar como entregada");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleReturn = async (reservationId: number) => {
+    try {
+      setLoading(true);
+      // await Reservations.return(reservationId);
+      // await loadApprovedRequests();
+      console.log(`Reserva ${reservationId} marcada como devuelta`);
+    } catch (err) {
+      console.error(err);
+      // toast.error("No se pudo marcar como devuelta");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <WebLayout headerContent={headerContent}>
@@ -186,12 +217,12 @@ export const TechnicianDashboard: React.FC = () => {
                     
                     <div className="flex gap-2">
                       {request.status === 'pendiente' && (
-                        <Button size="sm" className="flex-1">
+                        <Button size="sm" className="flex-1" onClick={() => handleDeliver(Number(request.id))}>
                           Entregar
                         </Button>
                       )}
                       {request.status === 'entregado' && (
-                        <Button size="sm" variant="outline" className="flex-1">
+                        <Button size="sm" variant="outline" className="flex-1" onClick={() => handleReturn(Number(request.id))}>
                           Marcar Devuelto
                         </Button>
                       )}

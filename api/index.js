@@ -243,6 +243,52 @@ app.post("/api/me/notifications", requireAuth, async (req, res) => {
 });
 
 
+app.post("/api/reservations/:id/deliver", requireAuth, async (req, res) => {
+  try {
+    const reservationId = Number(req.params.id);
+    const userId = req.user.id;
+    // opcional: verificar rol
+    const allowed = ["tecnico", "encargado", "administrador"];
+    if (!allowed.includes(String(req.user.role).toLowerCase())) {
+      return res.status(403).json({ error: "No autorizado" });
+    }
+
+    const p = await getPool();
+    const r = await p.request()
+      .input("reservation_id", sql.Int, reservationId)
+      .input("delivered_by", sql.Int, userId)
+      .execute("dbo.Reservation_Deliver");
+
+    return res.json({ ok: true, result: r.recordset?.[0] || null });
+  } catch (e) {
+    console.error("RES DELIVER ERROR:", e.message || e);
+    return res.status(500).json({ error: "DB error" });
+  }
+});
+
+app.post("/api/reservations/:id/return", requireAuth, async (req, res) => {
+  try {
+    const reservationId = Number(req.params.id);
+    const userId = req.user.id;
+    const allowed = ["tecnico", "encargado", "administrador"];
+    if (!allowed.includes(String(req.user.role).toLowerCase())) {
+      return res.status(403).json({ error: "No autorizado" });
+    }
+
+    const p = await getPool();
+    const r = await p.request()
+      .input("reservation_id", sql.Int, reservationId)
+      .input("returned_by", sql.Int, userId)
+      .execute("dbo.Reservation_Return");
+
+    return res.json({ ok: true, result: r.recordset?.[0] || null });
+  } catch (e) {
+    console.error("RES RETURN ERROR:", e.message || e);
+    return res.status(500).json({ error: "DB error" });
+  }
+});
+
+
 const PORT = Number(process.env.PORT || 3000);
 
 const server = app.listen(PORT, "0.0.0.0", () => {

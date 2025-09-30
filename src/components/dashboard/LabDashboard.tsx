@@ -45,7 +45,7 @@ interface Equipment {
 export const LabDashboard: React.FC = () => {
   const [selectedLab] = useState<LabInfo>({
     name: 'Laboratorio de Física Avanzada',
-    code: 'LAB-FIS-001',
+    code: 'LAB0001',
     location: 'Edificio de Ciencias, Piso 3, Aula 301-A TEC - Campus Central',
     department: 'Escuela de Física'
   });
@@ -53,14 +53,14 @@ export const LabDashboard: React.FC = () => {
   const [responsibles] = useState<Responsible[]>([
     {
       name: 'Dr. María Elena Rodríguez',
-      email: 'mrodriguez@tec.cr',
-      phone: '+1 (2) 234-5678',
+      email: 'mrodriguez@itcr.ac.cr',
+      phone: '+506 1234-5678',
       role: 'Responsable Principal'
     },
     {
       name: 'Ing. Carlos Mendoza',
-      email: 'cmendoza@tec.cr', 
-      phone: '+1 (2) 234-5679',
+      email: 'cmendoza@itcr.ac.cr', 
+      phone: '+506 1234-5679',
       role: 'Coordinador Técnico'
     }
   ]);

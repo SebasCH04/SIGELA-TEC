@@ -15,13 +15,10 @@ import {
    CheckCircle,
    AlertCircle,
    XCircle,
-   PenToolIcon,
-   CpuIcon,
    CogIcon
  } from 'lucide-react';
 import { Notifs, NotificationRow } from '@/services/notifications';
 import { WebLayout } from '../layout/WebLayout';
-import { Tooltip } from '@radix-ui/react-tooltip';
 
 interface Reservation {
   id: string;

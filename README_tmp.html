@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>README.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="sigela-tec---sistema-de-gesti%C3%B3n-de-laboratorios">SIGELA-TEC - Sistema de Gestión de Laboratorios</h1>
+<h4 id="instituto-tecnol%C3%B3gico-de-costa-rica---escuela-de-computaci%C3%B3n">Instituto Tecnológico de Costa Rica - Escuela de Computación</h4>
+<h4 id="administraci%C3%B3n-de-proyectos---ic4810">Administración de proyectos - IC4810</h4>
+<h4 id="estudiantes-sebastian-calvo-hern%C3%A1ndez-isaac-gamboa-ure%C3%B1a-daniel-brenes-g%C3%B3mez">Estudiantes: Sebastian Calvo Hernández, Isaac Gamboa Ureña, Daniel Brenes Gómez</h4>
+<h4 id="profesor-jaime-solano-soto">Profesor: Jaime Solano Soto</h4>
+<hr>
+<h2 id="tabla-de-contenidos">Tabla de contenidos</h2>
+<ol>
+<li>I. Introducción</li>
+<li>II. Ámbito del sistema</li>
+<li>III. Base de datos</li>
+<li>IV. Pruebas</li>
+<li>V. Reflexión (Post mortem)</li>
+<li>VI. Instalación del sistema</li>
+<li>VII. Apéndices</li>
+</ol>
+<hr>
+<h2 id="i-introducci%C3%B3n">I. Introducción</h2>
+<p>Visión general<br>
+SIGELA‑TEC es una aplicación web diseñada para coordinar reservas y la gestión de recursos en laboratorios del TEC. La solución plantea dashboards y permisos por rol (estudiante, profesor, técnico, encargado, administrador, departamento) y utiliza una SPA (React + Vite) que consume una API REST (Node + Express) conectada a SQL Server.</p>
+<p>Definición del problema<br>
+Los procesos manuales de gestión provocan conflictos de horarios, falta de trazabilidad en entrega/devolución de equipo y dificultades para coordinar mantenimiento. Estas deficiencias generan desperdicio de tiempo y recursos.</p>
+<p>Solución propuesta<br>
+Se propone una plataforma centralizada que autentica usuarios por rol (JWT en cookie httpOnly), permite búsqueda y reserva de recursos, registra movimientos de inventario, muestra próximas reservas y envía notificaciones por usuario. La interfaz es responsiva y el backend delega la lógica de datos a stored procedures seguros en SQL Server.</p>
+<p>Justificación (beneficios)<br>
+Con SIGELA‑TEC se reducen conflictos de reserva, se mejora la trazabilidad de activos, se facilita la coordinación de mantenimiento y se centraliza la información administrativa, lo que aporta eficiencia y control.</p>
+<p>Descripción del documento<br>
+Se introduce el proyecto, define alcance y supuestos, documenta la base de datos, expone la estrategia y resultados de pruebas, aporta una reflexión post mortem, un manual de instalación y apéndices con tablas y utilidades para entrega.</p>
+<p>Objetivos generales y específicos<br>
+El objetivo general es digitalizar y centralizar la gestión de laboratorios. Los objetivos específicos incluyen: autenticación por roles, búsqueda y reserva de recursos, vistas de próximas reservas e historial, notificaciones por usuario y control básico de inventario y movimientos.</p>
+<p>Criterios de éxito<br>
+Se considerará exitoso el proyecto si la aplicación permite iniciar sesión con cookie httpOnly, buscar recursos con filtros, visualizar próximas reservas por usuario, listar y marcar notificaciones como leídas, y si se documentan al menos cinco pruebas reproducibles con logs.</p>
+<hr>
+<h2 id="ii-%C3%A1mbito-del-sistema">II. Ámbito del sistema</h2>
+<p>Alcance<br>
+El sistema incluye creación y administración de usuarios y roles, búsqueda avanzada de recursos, creación y gestión de reservas, paneles por rol, histórico y próximas reservas, notificaciones por usuario y registro básico de inventario y movimientos. También expone endpoints administrativos para extracción de datos y mantenimiento.</p>
+<p>Suposiciones<br>
+Se asume la existencia de una base de datos Microsoft SQL Server con los stored procedures que el backend invoca. En desarrollo se opera generalmente sin TLS; para producción es obligatorio habilitar HTTPS y cookies con secure=true.</p>
+<p>Restricciones<br>
+La API depende de stored procedures en MSSQL y las sesiones se gestionan mediante cookie httpOnly (no accesible desde JS). En el ejemplo de backend las contraseñas pueden compararse en texto; antes de subir a producción es imprescindible usar hashing (bcrypt) y revisar políticas de secretos.</p>
+<p>Funcionamiento (HW/SW / tiempos)<br>
+Para pruebas locales un servidor con 1 vCPU y 1–2 GB RAM es suficiente; producción requerirá recursos mayores según carga. Software requerido: Node.js (v18+), npm, SQL Server accesible. El despliegue local típico (DB preparada, npm install, arrancar servidor y frontend) toma entre 10 y 20 minutos.</p>
+<hr>
+<h2 id="iii-base-de-datos">III. Base de datos</h2>
+<p>Esquema general<br>
+Las entidades principales son: Users, Labs, Resources, Reservations, ReservationFulfillment, Inventory, InventoryMovements, MaintenanceJobs, AuditLog, StatusLabels y Notifications.</p>
+<p><img src="file:///home/sebas/SIGELA-TEC/documentacion/DiagramaBD.png" alt="Diagrama del sistema"></p>
+<p>Descripción de tablas (en resumen)<br>
+Users contiene credenciales, rol y estado. Labs describe laboratorios y ubicaciones. Resources lista equipos vinculados a labs. Reservations guarda intervalos de uso y estados. ReservationFulfillment documenta entregas y devoluciones. Inventory y InventoryMovements controlan stock y movimientos con motivo y usuario. Notifications almacena mensajes por usuario y su marca de lectura.</p>
+<p>Integridad referencial y restricciones<br>
+Existen claves foráneas entre Resources a Labs, Reservations a (Resources,Labs,Users), InventoryMovements a Resources y Notifications a Users. Se recomienda agregar CHECKs: Reservations debe cumplir starts_at &lt; ends_at; Inventory debe garantizar total_qty &gt;= 0.</p>
+<p>Índices y rendimiento<br>
+Índices sugeridos: Resources(lab_id, is_active), Reservations(resource_id, starts_at), InventoryMovements(resource_id, created_at) y AuditLog(ts DESC). Revisar planes de ejecución según volumen.</p>
+<p>Stored procedures usados (revisar nombres exactos en <code>api/index.js</code>)<br>
+Auth_GetUserByUsernameRole, GetUserById, dbo.usp_Labs_List, sigela.usp_Resources_Search, sigela.usp_Reservations_UpcomingByUser, sigela.usp_Reservations_HistoryByUser (o equivalente), dbo.Notifications_ListByUser, dbo.Notifications_MarkRead, dbo.Notifications_Create.</p>
+<hr>
+<h2 id="iv-pruebas">IV. Pruebas</h2>
+<p>Estrategia de pruebas<br>
+Por ahora no contamos con  pruebas automatizadas. Estamos validando el proyecto de forma manual comprobando los flujos más importantes: login, búsqueda de recursos, creación de reservas y notificaciones. Para cada verificación manual registre el paso o comando realizado, la respuesta JSON completa y los extractos de log relevantes. En una próxima iteración añadiremos pruebas automatizadas (Jest + supertest para backend; Playwright o Cypress para E2E) y configuraremos CI para ejecutarlas automáticamente.</p>
+<p><img src="file:///home/sebas/SIGELA-TEC/documentacion/Login.png" alt="Login"></p>
+<p><img src="file:///home/sebas/SIGELA-TEC/documentacion/EstudiantesDocentes.png" alt="Estudiante/Docente"></p>
+<p><img src="file:///home/sebas/SIGELA-TEC/documentacion/EstudiantesDocentesHistorial.png" alt="Historial"></p>
+<p><img src="file:///home/sebas/SIGELA-TEC/documentacion/EstudiantesDocentesAvisos.png" alt="Avisos"></p>
+<p><img src="file:///home/sebas/SIGELA-TEC/documentacion/Tech.png" alt="Tecnicos y Encargados"></p>
+<p><img src="file:///home/sebas/SIGELA-TEC/documentacion/TechInventario.png" alt="Inventario"></p>
+<p><img src="file:///home/sebas/SIGELA-TEC/documentacion/TechMantenimiento.png" alt="Mantenimiento"></p>
+<p><img src="file:///home/sebas/SIGELA-TEC/documentacion/TechReportes.png" alt="Reportes"></p>
+<p><img src="file:///home/sebas/SIGELA-TEC/documentacion/Lab.png" alt="Laboratorio y departamentos"></p>
+<p><img src="file:///home/sebas/SIGELA-TEC/documentacion/LabInventario.png" alt="Lab Inventario"></p>
+<p><img src="file:///home/sebas/SIGELA-TEC/documentacion/LabCalendario.png" alt="Lab Calendario"></p>
+<p><img src="file:///home/sebas/SIGELA-TEC/documentacion/LabRecursos.png" alt="Lab Recursos"></p>
+<p><img src="file:///home/sebas/SIGELA-TEC/documentacion/LabHistorial.png" alt="Lab Historial"></p>
+<p><img src="file:///home/sebas/SIGELA-TEC/documentacion/Admin.png" alt="Admin"></p>
+<p><img src="file:///home/sebas/SIGELA-TEC/documentacion/AdminConfig.png" alt="Admin Config"></p>
+<p><img src="file:///home/sebas/SIGELA-TEC/documentacion/AdminAuditoria.png" alt="Admin Auditoria"></p>
+<p><img src="file:///home/sebas/SIGELA-TEC/documentacion/AdminReportes.png" alt="Admin Reportes"></p>
+<hr>
+<h2 id="v-reflexi%C3%B3n-post-mortem">V. Reflexión (Post mortem)</h2>
+<p>Evaluación del proyecto<br>
+La separación entre frontend y backend facilita pruebas y despliegue independiente. La elección de cookies httpOnly para la sesión aporta protección frente a XSS. El uso de stored procedures centraliza la lógica de datos.</p>
+<p>Lecciones aprendidas<br>
+Es importante formalizar contratos API (OpenAPI) y añadir hashing de contraseñas y pruebas automatizadas desde etapas tempranas. El manejo de secretos y configuración es crítico para despliegues seguros.</p>
+<p>Errores y limitaciones conocidos<br>
+En el ejemplo entregado el backend puede comparar contraseñas en texto: esto debe corregirse por bcrypt. No se incluyen suites de tests automatizados ni scripts de despliegue para producción en la versión entregada.</p>
+<p>Mejoras para iteraciones futuras<br>
+Implementar hashing de contraseñas, tests unitarios y e2e, documentación OpenAPI, CI/CD y configuración de despliegue con HTTPS y cookies secure.</p>
+<hr>
+<h2 id="vi-instalaci%C3%B3n-del-sistema">VI. Instalación del sistema</h2>
+<h4 id="manual-paso-a-paso-linux">Manual paso a paso (Linux)</h4>
+<p>Requisitos previos: Node.js v18+, npm, acceso a SQL Server y Git. Configure la base de datos antes de arrancar el backend.</p>
+<p>Clonar el repositorio y preparar proyectos:</p>
+<pre class="hljs"><code><div>git <span class="hljs-built_in">clone</span> https://github.com/SebasCH04/SIGELA-TEC
+<span class="hljs-built_in">cd</span> SIGELA-TEC
+</div></code></pre>
+<p>Preparar y levantar backend:</p>
+<pre class="hljs"><code><div><span class="hljs-built_in">cd</span> api
+npm install
+node index.js
+</div></code></pre>
+<p>Instalar y arrancar frontend:</p>
+<pre class="hljs"><code><div><span class="hljs-built_in">cd</span> ..
+npm install
+npm run dev
+</div></code></pre>
+<p>Conexión entre capas<br>
+El frontend realiza fetch a la API en http://localhost:3000 (configurable). Asegúrese de que las variables en <code>api/.env</code> apunten correctamente al servidor SQL y que los stored procedures estén instalados.</p>
+<hr>
+<h2 id="vii-ap%C3%A9ndices">VII. Apéndices</h2>
+<p>Tablas detalladas (ejemplo técnico)<br>
+Users: id PK, username, password(hashed), role, active, created_at.<br>
+Labs: id PK, name, code, building, is_active.<br>
+Resources: id PK, lab_id FK, resource_name, building, is_active.<br>
+Reservations: id PK, resource_id FK, lab_id FK, user_id FK, starts_at, ends_at, status.<br>
+ReservationFulfillment: reservation_id FK, delivered_at, delivered_by, returned_at, returned_by, notes.<br>
+Inventory: resource_id PK, total_qty, maintenance_qty, min_stock, updated_at.<br>
+InventoryMovements: id PK, resource_id FK, movement_type, qty, reason, user_id, created_at.<br>
+Notifications: id PK, user_id FK, title, message, kind, created_at, read_at.</p>
+<p>Programas por capa (archivos clave)<br>
+Frontend principales: <code>src/main.tsx</code>, <code>src/App.tsx</code>, <code>src/components/auth/LoginForm.tsx</code>, <code>src/components/dashboard/UserDashboard.tsx</code>, <code>src/components/layout/WebLayout.tsx</code>, <code>src/lib/api.ts</code>, <code>src/services/auth.ts</code>, <code>src/services/notifications.ts</code>.<br>
+Backend principal: <code>api/index.js</code> y el fichero de configuración <code>api/.env</code>.</p>
+<p>cURL y ejemplos rápidos (usar cookies para sesión)
+Health:</p>
+<pre class="hljs"><code><div>curl -sS http://localhost:3000/api/health
+</div></code></pre>
+<p>Login (guardar cookie en cookies.txt):</p>
+<pre class="hljs"><code><div>curl -v -X POST -H <span class="hljs-string">"Content-Type:application/json"</span> -c cookies.txt \
+  -d <span class="hljs-string">'{"username":"demo","password":"demo","role":"ESTUDIANTE"}'</span> \
+  http://localhost:3000/api/auth/login
+</div></code></pre>
+<p>Me (usar cookie):</p>
+<pre class="hljs"><code><div>curl -b cookies.txt http://localhost:3000/api/auth/me
+</div></code></pre>
+<p>Buscar recursos:</p>
+<pre class="hljs"><code><div>curl -b cookies.txt <span class="hljs-string">"http://localhost:3000/api/resources/search?q=microscopio&amp;available=1"</span>
+</div></code></pre>
+
+</body>
+</html>

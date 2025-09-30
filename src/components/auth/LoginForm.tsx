@@ -12,9 +12,9 @@ const userRoles = [
   { value: 'estudiante',   label: 'Estudiante' },
   { value: 'profesor',     label: 'Profesor/Docente' },
   { value: 'tecnico',      label: 'Personal Técnico' },
-  { value: 'encargado',    label: 'Encargado de Laboratorio' },
+  { value: 'encargado',    label: 'Encargado del Laboratorio' },
+  { value: 'departamento', label: 'Departamento' },
   { value: 'administrador',label: 'Administrador del Sistema' },
-  { value: 'departamento', label: 'Escuela/Departamento' },
 ];
 
 // 2) Mapa "UI → Backend" (ajústalo a los códigos reales que guardaste en SQL)
@@ -31,7 +31,6 @@ const ROLE_UI_TO_API: Record<string, string> = {
 const MODULE_BY_ROLE: Record<string, string> = {
   ADMIN:        '/dashboard/administrador',
   PROF:         '/dashboard/profesor',
-  PROFESOR:     '/dashboard/profesor',      // por si usas este código en BD
   TECNICO:      '/dashboard/tecnico',
   ENCARGADO:    '/dashboard/encargado',
   ESTUDIANTE:   '/dashboard/estudiante',
